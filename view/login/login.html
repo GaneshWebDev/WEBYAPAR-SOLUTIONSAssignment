@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add the Bootstrap CSS link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <title>Login Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Edit</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/signUp">signUp</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+<div class="container mt-5">
+  <h1>Login</h1>
+  <form action="/loginSubmit" method="post">
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+
+    <!-- Login Button -->
+    <div class="divSubmit">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a href="/signUp">Create New Account</a>
+      </div>
+    
+  </form>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Select the form element
+    const form = document.querySelector('form');
+
+    // Add an event listener to the form for the submit event
+    form.addEventListener('submit', function (event) {
+      // Prevent the default form submission
+      event.preventDefault();
+
+      // Collect form data
+      const formData = new FormData(form);
+
+      // Make a fetch POST request
+      fetch('/loginSubmit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded', // or 'application/json' depending on your server
+        },
+        body: new URLSearchParams(formData),
+      })
+        .then(response => response.json()) // Assuming the response is in JSON format
+        .then(data => {
+          // Handle the response data as needed
+          console.log('Response:', data);
+
+          // Store the response in local storage
+          localStorage.setItem('userData', JSON.stringify(data));
+
+          // Redirect or perform any other actions as needed
+          window.location.href = '/index'; // Redirect to dashboard, for example
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          // Handle errors as needed
+        });
+    });
+  });
+</script>
+<!-- Add the Bootstrap JS scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

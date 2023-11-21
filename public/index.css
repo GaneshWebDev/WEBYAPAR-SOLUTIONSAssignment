@@ -1,0 +1,28 @@
+/*index pages css*/
+
+/* signin and login page css*/
+.divSubmit{
+    display: flex;
+    justify-content: space-between;
+}
+.images{
+    display: block;
+}
+img{
+    display: block;
+    width: 300px;
+    height: 200px;
+    max-width: 100%;
+    border: 2px solid palegoldenrod;
+    margin: 10px;
+}
+.container{
+    display:flex ;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+     align-items: center;
+} 
+#output{
+    margin: 0 5px;
+}
